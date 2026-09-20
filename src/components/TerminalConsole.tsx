@@ -1,0 +1,280 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Terminal as TerminalIcon, X, Minimize2, Maximize2, Send, CornerDownLeft, Sparkles } from 'lucide-react';
+import { DEVELOPER_PROFILE, SKILL_NODES, DEV_ITEMS_LOADOUT, QUEST_LOG, VENEVA_OVERHAUL, CERTIFICATIONS_DATA } from '../data/portfolioData';
+import { TerminalLog } from '../types';
+import { soundManager } from '../utils/audio';
+
+interface TerminalConsoleProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onOpenVeneva: () => void;
+}
+
+export const TerminalConsole: React.FC<TerminalConsoleProps> = ({
+  isOpen,
+  onClose,
+  onOpenVeneva,
+}) => {
+  const [input, setInput] = useState('');
+  const [logs, setLogs] = useState<TerminalLog[]>([
+    {
+      id: 'log-0',
+      command: 'sys.init',
+      output: `AARONICA BASH // v2.4.0 (x86_64-systems-paladin)
+Type 'help' to inspect command matrix or 'whoami' for operator profile.`,
+      timestamp: new Date().toLocaleTimeString(),
+      type: 'system',
+    },
+  ]);
+  const [historyIndex, setHistoryIndex] = useState<number>(-1);
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+
+  const bottomRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [logs]);
+
+  if (!isOpen) return null;
+
+  const handleCommandSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const cmd = input.trim();
+    if (!cmd) return;
+
+    soundManager.playTerminal();
+
+    setCommandHistory((prev) => [...prev, cmd]);
+    setHistoryIndex(-1);
+
+    const lower = cmd.toLowerCase();
+    let output = '';
+    let type: TerminalLog['type'] = 'command';
+
+    switch (lower) {
+      case 'help':
+        output = `AVAILABLE SYSTEM COMMANDS:
+  whoami       - Display Aaron Mutua's developer dossier & callsign
+  certs        - Display accredited industry certifications & credentials
+  c-lang       - Inspect low-level C secure systems training details
+  azure        - Review Microsoft Azure Certification speedrun & DevOps
+  veneva       - View Veneva 2.0 Overhaul architecture & launch lab
+  julisha      - GDG Pwani Hackathon 2026 Julisha Healthcare AI
+  skills       - Print active combat proficiency matrix
+  inventory    - List equipped developer loot & items
+  quests       - View active campaign quests & XP rewards
+  contact      - Display direct communication channels
+  matrix       - Initiate cyber text cascade
+  clear        - Clear console buffer
+  exit         - Close terminal session`;
+        type = 'system';
+        break;
+
+      case 'certs':
+      case 'certifications':
+      case 'badges':
+        output = `ACCREDITED INDUSTRY CERTIFICATIONS:
+${CERTIFICATIONS_DATA.map((c) => `• [${c.issuerShort.padEnd(5)}] ${c.title} (${c.status}) - Mastery: ${c.level}%`).join('\n')}
+Type 'c-lang' or 'azure' for deep dive into active specialization areas.`;
+        type = 'success';
+        break;
+
+      case 'whoami':
+      case 'bio':
+        output = `OPERATOR: ${DEVELOPER_PROFILE.name} (${DEVELOPER_PROFILE.callsign})
+ROLE: ${DEVELOPER_PROFILE.title}
+LOCATION: ${DEVELOPER_PROFILE.location}
+STATUS: ${DEVELOPER_PROFILE.status}
+PHILOSOPHY: "${DEVELOPER_PROFILE.philosophy}"`;
+        type = 'success';
+        break;
+
+      case 'c-lang':
+      case 'c':
+        output = `[C LANGUAGE SECURE SYSTEMS AT SCALE]
+- Paradigm: Bare-metal memory management & deterministic execution
+- Key Practices: Custom fixed-size chunk allocators, 0 mallocs in hot loops
+- Security Armor: Buffer bounds checks, POSIX mutex thread safety, ASLR compliance
+- Project: Veneva 2.0 Aegis Micro-Daemon (<1.2ms latency, 0 byte memory leak)`;
+        type = 'success';
+        break;
+
+      case 'azure':
+      case 'devops':
+        output = `[MICROSOFT AZURE & DEVOPS OBJECTIVES]
+- Target Certifications: AZ-900 (Fundamentals), AZ-104 (Administrator), AZ-400 (DevOps Solutions)
+- Infrastructure: Docker multi-stage containers, GitHub Actions CI/CD pipelines
+- Cloud Target: Automated Azure Container Apps & Kubernetes deployments`;
+        type = 'success';
+        break;
+
+      case 'veneva':
+        output = `[THE VENEVA PROJECT 2.0 OVERHAUL]
+- Flaw 1 Solved: Non-blocking async worker pool replaces synchronous queue
+- Flaw 2 Solved: Zero-Trust ed25519 token rotation replaces static cookies
+- Flaw 3 Solved: Dual-Core C micro-daemon handles cryptography & high scale
+- Flaw 4 Solved: Fluid cyber HUD responsive from mobile to 4K TV monitors!`;
+        type = 'success';
+        break;
+
+      case 'julisha':
+        output = `[JULISHA HEALTHCARE AI SYSTEM]
+- Recognition: GDG Pwani Hackathon 2026 Gold Medal
+- Mission: AI-powered multilingual healthcare management for Primary Health Centers
+- Features: Swahili/English NLP, Pearson stockout-to-satisfaction engine, Biometric verification`;
+        type = 'success';
+        break;
+
+      case 'skills':
+        output = `PROFICIENCY TREE:
+${SKILL_NODES.map((s) => `• ${s.name.padEnd(35)} [${s.level}%] (${s.tier})`).join('\n')}`;
+        type = 'system';
+        break;
+
+      case 'inventory':
+      case 'items':
+        output = `TACTICAL ARSENAL:
+${DEV_ITEMS_LOADOUT.map((item) => `[${item.rarity.toUpperCase()}] ${item.name} (LV.${item.level}) - ${item.category}`).join('\n')}`;
+        type = 'system';
+        break;
+
+      case 'quests':
+        output = `ACTIVE CAMPAIGN QUESTS:
+${QUEST_LOG.map((q) => `• [${q.status}] ${q.title} (+${q.xpReward} XP, ${q.progressPct}% complete)`).join('\n')}`;
+        type = 'system';
+        break;
+
+      case 'contact':
+        output = `DIRECT COMM CHANNELS:
+Email:    ${DEVELOPER_PROFILE.email}
+Phone:    ${DEVELOPER_PROFILE.phone} (${DEVELOPER_PROFILE.phoneInternational})
+GitHub:   ${DEVELOPER_PROFILE.github}
+LinkedIn: https://${DEVELOPER_PROFILE.linkedin}`;
+        type = 'success';
+        break;
+
+      case 'matrix':
+      case 'hack':
+        output = `WAKING UP THE NEO-CYBER DECK...
+01000001 01000001 01010010 01001111 01001110 01001001 01000011 01000001
+>>> ACCESS GRANTED: WELCOME TO AARON'S CORE SYSTEMS.`;
+        type = 'easteregg';
+        break;
+
+      case 'clear':
+      case 'cls':
+        setLogs([]);
+        setInput('');
+        return;
+
+      case 'exit':
+      case 'quit':
+        onClose();
+        return;
+
+      default:
+        output = `Command not recognized: '${cmd}'. Type 'help' to see valid commands.`;
+        type = 'error';
+        break;
+    }
+
+    setLogs((prev) => [
+      ...prev,
+      {
+        id: `log-${Date.now()}`,
+        command: cmd,
+        output,
+        timestamp: new Date().toLocaleTimeString(),
+        type,
+      },
+    ]);
+
+    setInput('');
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fadeIn font-['JetBrains_Mono']">
+      <div className="w-full max-w-3xl h-[520px] rounded-2xl border-2 border-cyan-500/70 bg-[#030814] shadow-[0_0_50px_rgba(6,182,212,0.3)] flex flex-col overflow-hidden">
+        {/* Terminal Header */}
+        <div className="flex items-center justify-between px-4 py-3 bg-[#061224] border-b border-cyan-900/60 text-xs">
+          <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-1.5">
+              <span className="w-3 h-3 rounded-full bg-red-500/80 cursor-pointer" onClick={onClose}></span>
+              <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+              <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
+            </div>
+            <span className="text-cyan-400 font-bold ml-2 flex items-center gap-1.5">
+              <TerminalIcon size={14} /> AARONICA_SYSTEM_CLI // v2.4.0
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2 text-slate-400">
+            <span className="text-[11px] hidden sm:inline">TYPE 'help' FOR CMD LIST</span>
+            <button
+              onClick={onClose}
+              className="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white"
+            >
+              <X size={16} />
+            </button>
+          </div>
+        </div>
+
+        {/* Terminal Body */}
+        <div className="flex-1 p-4 overflow-y-auto space-y-3 text-xs custom-scrollbar">
+          {logs.map((log) => (
+            <div key={log.id} className="space-y-1">
+              <div className="flex items-center gap-2 text-slate-500 text-[11px]">
+                <span className="text-cyan-400 font-bold">guest@aaronica:~$</span>
+                <span className="text-white font-semibold">{log.command}</span>
+                <span className="text-[10px] ml-auto">{log.timestamp}</span>
+              </div>
+              <pre className={`whitespace-pre-wrap leading-relaxed pl-4 border-l-2 ${
+                log.type === 'error'
+                  ? 'border-red-500 text-red-400'
+                  : log.type === 'success'
+                  ? 'border-emerald-500 text-emerald-300'
+                  : log.type === 'easteregg'
+                  ? 'border-purple-500 text-purple-300'
+                  : 'border-cyan-500/50 text-cyan-100'
+              }`}>
+                {log.output}
+              </pre>
+            </div>
+          ))}
+          <div ref={bottomRef} />
+        </div>
+
+        {/* Terminal Input Bar */}
+        <form
+          onSubmit={handleCommandSubmit}
+          className="flex items-center gap-2 p-3 bg-[#061224] border-t border-cyan-900/60"
+        >
+          <span className="text-cyan-400 font-bold text-xs pl-2">guest@aaronica:~$</span>
+          <input
+            ref={inputRef}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type 'help', 'whoami', 'c-lang', 'azure', 'veneva'..."
+            className="flex-1 bg-transparent border-none outline-none text-white text-xs font-mono placeholder:text-slate-600"
+          />
+          <button
+            type="submit"
+            className="p-1.5 rounded bg-cyan-500 text-black font-bold text-xs hover:bg-cyan-400 transition-colors"
+          >
+            <CornerDownLeft size={14} />
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
