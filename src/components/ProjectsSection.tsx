@@ -11,7 +11,9 @@ import {
   ShieldCheck, 
   Layers, 
   Zap,
-  Play
+  Play,
+  Compass,
+  MapPin
 } from 'lucide-react';
 import { FEATURED_PROJECTS } from '../data/portfolioData';
 import { ProjectDetail } from '../types';
@@ -20,16 +22,21 @@ import { soundManager } from '../utils/audio';
 interface ProjectsSectionProps {
   onOpenVeneva: () => void;
   onOpenJulishaDemo: () => void;
+  onOpenGeoHousing: () => void;
 }
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
   onOpenVeneva,
   onOpenJulishaDemo,
+  onOpenGeoHousing,
 }) => {
   const [selectedProject, setSelectedProject] = useState<ProjectDetail | null>(null);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
+      case 'Ongoing Project':
+      case 'Active Development':
+        return 'bg-emerald-950/80 border-emerald-400 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.3)] animate-pulse';
       case 'Active Overhaul':
         return 'bg-cyan-950/80 border-cyan-400 text-cyan-300';
       case 'Production / Hackathon':
@@ -57,16 +64,27 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center flex-wrap gap-2">
+            <button
+              onClick={() => {
+                soundManager.playAchievement();
+                onOpenGeoHousing();
+              }}
+              className="px-3.5 py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-emerald-500 hover:to-teal-400 text-black font-['Chakra_Petch'] font-bold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] transition-all"
+            >
+              <Compass size={15} />
+              <span>GEOMAKAZI HOUSING AI</span>
+            </button>
+
             <button
               onClick={() => {
                 soundManager.playAchievement();
                 onOpenJulishaDemo();
               }}
-              className="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black font-['Chakra_Petch'] font-bold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(245,158,11,0.4)] transition-all"
+              className="px-3.5 py-2 rounded-lg bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-black font-['Chakra_Petch'] font-bold text-xs flex items-center gap-2 shadow-[0_0_15px_rgba(245,158,11,0.4)] transition-all"
             >
               <Award size={15} />
-              <span>LAUNCH JULISHA LIVE DEMO</span>
+              <span>JULISHA LIVE DEMO</span>
             </button>
           </div>
         </div>
@@ -141,7 +159,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
                 </div>
 
                 <div className="flex items-center justify-between pt-1">
-                  {proj.id === 'veneva-2' ? (
+                  {proj.id === 'geospatial-housing' ? (
+                    <button
+                      onClick={() => {
+                        soundManager.playAchievement();
+                        onOpenGeoHousing();
+                      }}
+                      className="inline-flex items-center gap-1.5 text-xs font-['Chakra_Petch'] font-bold text-emerald-400 hover:text-white group-hover:translate-x-1 transition-transform"
+                    >
+                      <Compass size={14} className="text-emerald-400" />
+                      <span>LAUNCH GEOMAKAZI SIMULATOR & BLUEPRINT</span>
+                      <ArrowRight size={14} />
+                    </button>
+                  ) : proj.id === 'veneva-2' ? (
                     <button
                       onClick={() => {
                         soundManager.playClick();

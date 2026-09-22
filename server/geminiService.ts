@@ -197,6 +197,12 @@ ACCREDITED INDUSTRY CERTIFICATIONS:
 - Target Objective: Microsoft Azure Certifications (AZ-900 Fundamentals, AZ-104 Administrator, AZ-400 DevOps).
 
 FEATURED PROJECTS:
+- GeoMakazi (Active Ongoing Project - Campus & National Housing Infrastructure AI):
+  * Tackling Kenya's 1.36 Trillion KES housing deficit (8.4% of national GDP, 50B housing budget) and campus hostel shortages.
+  * Solves the exhaustion of blind door-to-door room searches for university comrades and urban dwellers.
+  * Dual user portal: Comrades/Students (House Finders) and House Providers (Leasers) with Google OAuth & email auth.
+  * Architecture: React frontend, Google Maps satellite GIS, Express.js microservice (App.js, Index.js, Supabase.js), Supabase PostgreSQL with RLS, MinIO S3-compatible image buckets, in-memory Redis cache (<50ms response), Nginx reverse proxy, and Railway container orchestration.
+  * AI Features: Multi-criteria filtering (budget, security rating, scenery, hospital proximity, noise levels) and automated AI house health & regulatory condition assessment.
 - The Veneva Project (Overhaul in Progress):
   * Overhauling significant process flaws (blocking synchronous queues).
   * Major interface redesign: high-contrast, responsive across phones, tablets, laptops, and 4K TVs.
@@ -266,6 +272,15 @@ Created during the **Google Developers Group (GDG) Pwani Hackathon 2026**:
 - Multilingual AI healthcare management platform for Primary Healthcare Centers.
 - Correlates medication stockouts with patient satisfaction drops using Pearson analytics.
 - Incorporates English & Swahili interfaces and biometric validation to ensure transparent community clinic operations.`;
+  }
+  if (lower.includes('makazi') || lower.includes('geohousing') || lower.includes('housing') || lower.includes('campus') || lower.includes('infrastructure')) {
+    return `### 🏡 GeoMakazi: Geographical AI Housing Platform
+Aaron is actively developing **GeoMakazi**, a national and campus infrastructure AI system:
+- **Context & Crisis**: Kenya's housing sector represents 1.36 Trillion KES (8.4% of national GDP) with a 50B allocation, yet students (comrades) and urban dwellers suffer exhausting, manual door-to-door hunts.
+- **Dual User Portals**: Comrades (House Finders) and House Providers (Leasers) with Google OAuth and email verification.
+- **AI Recommendation Engine**: Multi-criteria filtering by budget, house type, security rating, campus gate distance, noise levels, and hospital proximity.
+- **AI House Health Scanner**: Inspects and audits structural conditions (ventilation, dampness, mold risk, regulatory compliance).
+- **Architecture**: React frontend + Google Maps satellite GIS, Express.js microservice (App.js, Index.js, Supabase.js), Supabase PostgreSQL (users, houses, profiles), MinIO S3 object buckets, Redis static cache (<50ms response), Nginx reverse proxy, and Railway container orchestration.`;
   }
   if (lower.includes('contact') || lower.includes('hire') || lower.includes('email') || lower.includes('phone')) {
     return `### 📡 Connect With Aaron Mutua

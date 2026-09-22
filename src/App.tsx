@@ -12,6 +12,7 @@ import { TerminalConsole } from './components/TerminalConsole';
 import { AICopilotModal } from './components/AICopilotModal';
 import { ResumeModal } from './components/ResumeModal';
 import { JulishaModal } from './components/JulishaModal';
+import { GeoHousingModal } from './components/GeoHousingModal';
 import { DEVELOPER_PROFILE } from './data/portfolioData';
 import { soundManager } from './utils/audio';
 import { Terminal, Sparkles, FileText, ArrowUp, Github, Linkedin, Mail } from 'lucide-react';
@@ -25,6 +26,7 @@ export default function App() {
   const [aiOpen, setAiOpen] = useState<boolean>(false);
   const [resumeOpen, setResumeOpen] = useState<boolean>(false);
   const [julishaOpen, setJulishaOpen] = useState<boolean>(false);
+  const [geoHousingOpen, setGeoHousingOpen] = useState<boolean>(false);
 
   const scrollToVeneva = () => {
     setActiveTab('veneva');
@@ -79,6 +81,7 @@ export default function App() {
         <ProjectsSection
           onOpenVeneva={scrollToVeneva}
           onOpenJulishaDemo={() => setJulishaOpen(true)}
+          onOpenGeoHousing={() => setGeoHousingOpen(true)}
         />
 
         {/* Active Quests, Milestones & Education Timeline */}
@@ -190,6 +193,11 @@ export default function App() {
       <JulishaModal
         isOpen={julishaOpen}
         onClose={() => setJulishaOpen(false)}
+      />
+
+      <GeoHousingModal
+        isOpen={geoHousingOpen}
+        onClose={() => setGeoHousingOpen(false)}
       />
     </div>
   );

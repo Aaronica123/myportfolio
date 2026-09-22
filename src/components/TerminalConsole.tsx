@@ -65,6 +65,7 @@ Type 'help' to inspect command matrix or 'whoami' for operator profile.`,
         output = `AVAILABLE SYSTEM COMMANDS:
   whoami       - Display Aaron Mutua's developer dossier & callsign
   certs        - Display accredited industry certifications & credentials
+  geohousing   - Explore GeoMakazi campus & national housing infrastructure AI
   c-lang       - Inspect low-level C secure systems training details
   azure        - Review Microsoft Azure Certification speedrun & DevOps
   veneva       - View Veneva 2.0 Overhaul architecture & launch lab
@@ -131,6 +132,21 @@ PHILOSOPHY: "${DEVELOPER_PROFILE.philosophy}"`;
 - Recognition: GDG Pwani Hackathon 2026 Gold Medal
 - Mission: AI-powered multilingual healthcare management for Primary Health Centers
 - Features: Swahili/English NLP, Pearson stockout-to-satisfaction engine, Biometric verification`;
+        type = 'success';
+        break;
+
+      case 'geohousing':
+      case 'makazi':
+      case 'housing':
+      case 'campus':
+        output = `[GEOMAKAZI: GEOGRAPHICAL AI HOUSING PLATFORM (ONGOING INFRASTRUCTURE PROJECT)]
+- Context: Kenya's 1.36 Trillion KES housing sector (8.4% GDP), 50B budget allocation
+- Mission: Eradicate exhausting manual door-to-door room hunts for campus comrades & urban finders
+- Architecture: React frontend, Google Maps satellite GIS, Express.js microservice (App.js, Index.js, Supabase.js)
+- Database: Supabase PostgreSQL (Users, Houses, Profiles) with Google OAuth & Row-Level Security
+- Storage & Caching: MinIO S3-compatible image buckets + in-memory Redis caching (<50ms response)
+- AI Inspection: Automated house health & regulatory condition assessment (ventilation, mold, safety)
+- Gateway & Host: Nginx reverse proxy + Railway container orchestration`;
         type = 'success';
         break;
 

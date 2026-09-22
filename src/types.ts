@@ -44,8 +44,8 @@ export interface ProjectDetail {
   id: string;
   title: string;
   tagline: string;
-  category: 'Systems Overhaul' | 'Healthcare AI' | 'DevOps & Cloud' | 'Enterprise Infrastructure';
-  status: 'Active Overhaul' | 'Production / Hackathon' | 'Completed Attachment';
+  category: 'Systems Overhaul' | 'Healthcare AI' | 'DevOps & Cloud' | 'Enterprise Infrastructure' | 'Geospatial AI & Infrastructure' | 'Civic & Infrastructure AI';
+  status: 'Active Overhaul' | 'Production / Hackathon' | 'Completed Attachment' | 'Active Development' | 'Ongoing Project';
   techStack: string[];
   summary: string;
   problemStatement: string;

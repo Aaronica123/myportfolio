@@ -254,6 +254,23 @@ export const SKILL_NODES: SkillNode[] = [
 
 export const QUEST_LOG: QuestItem[] = [
   {
+    id: 'quest-geospatial-housing',
+    title: 'GeoMakazi: Campus & National Housing Infrastructure AI',
+    type: 'Main Quest',
+    status: 'In Progress',
+    progressPct: 65,
+    xpReward: 3500,
+    badge: 'Civic Infrastructure Architect',
+    objective: 'Engineer a geographical AI housing platform to eradicate blind door-to-door room searches for university comrades and urban dwellers across Kenya\'s 1.36T Ksh housing economy.',
+    deliverables: [
+      'Supabase PostgreSQL schema (users, houses, profiles) with Row-Level Security & Google OAuth',
+      'Google Maps & satellite geocoding engine with sub-meter location accuracy & GPS tracking',
+      'AI multi-criteria recommendation engine (budget, security, noise conditions, hospital proximity)',
+      'Automated house health & regulatory condition scanner assessing structural/room safety',
+      'MinIO S3 object buckets for high-res property assets + Redis caching and Nginx reverse proxy',
+    ],
+  },
+  {
     id: 'quest-azure',
     title: 'Azure Cloud & DevOps Certification Speedrun',
     type: 'Cert Quest',
@@ -420,6 +437,32 @@ export const VENEVA_OVERHAUL: VenevaOverhaulSpec = {
 };
 
 export const FEATURED_PROJECTS: ProjectDetail[] = [
+  {
+    id: 'geospatial-housing',
+    title: 'GeoMakazi: Geographical AI House Hunting & Infrastructure',
+    tagline: 'Real-Time Geographical AI Platform Solving Campus & National Housing Shortages in Kenya',
+    category: 'Geospatial AI & Infrastructure',
+    status: 'Ongoing Project',
+    techStack: ['React', 'Supabase (Auth & DB)', 'MinIO (S3 Buckets)', 'Express.js', 'Google Maps API', 'Redis', 'Nginx', 'Railway'],
+    summary: 'An ongoing civic and campus infrastructure initiative solving Kenya\'s severe housing accessibility crisis. While Kenya\'s housing economy contributes 1.36 Trillion KES (8.4% of GDP) with a 50B national budget, university students (comrades) and urban dwellers still endure exhausting manual door-to-door searches. GeoMakazi leverages real-time satellite imagery, Supabase auth/DB, MinIO buckets, and AI multi-criteria filtering to match house finders with verified leasers.',
+    problemStatement: 'House hunters and campus students lack a reliable reference point, relying on luck and manual door-to-door inquiries. They often settle for substandard or unsafe housing out of sheer exhaustion, while house providers struggle to efficiently reach verified tenants.',
+    solutionArchitecture: 'Engineered with a high-availability decoupled architecture: React frontend with Google Maps geospatial visualizer, Express.js microservice layer (App.js, Index.js, Supabase.js), Supabase PostgreSQL with RLS and OAuth for finders/leasers, MinIO S3-compatible image buckets, Redis static asset caching, Nginx reverse proxy, and Railway containerized orchestration.',
+    keyFeatures: [
+      'Sub-meter real-time geographical accuracy powered by satellite mapping & AI search algorithms',
+      'Dual portal for Comrades/Students (House Finders) and House Providers (Leasers) with Google & email authentication',
+      'Multi-criteria AI recommendation filtering: budget, house type, security rating, scenery, hospital proximity & noise levels',
+      'Automated house health & regulatory condition assessment via AI image and infrastructure analysis',
+      'Support for live GPS user location tracking as well as manual locality search across Kenyan university campuses and towns',
+      'High-performance media delivery backed by MinIO object storage buckets and Redis image caching',
+    ],
+    githubUrl: 'https://github.com/Aaronica123/portfolio.git',
+    gameLootUnlocked: 'Mythic Relic: GeoSpatial Pathfinder Beacon',
+    metrics: [
+      { label: 'Housing Sector GDP', value: '8.4% (1.36T KES)' },
+      { label: 'Target Demographic', value: 'Comrades & Leasers' },
+      { label: 'Geo Accuracy', value: 'Real-Time Sat' },
+    ],
+  },
   {
     id: 'veneva-2',
     title: 'The Veneva Project 2.0 (Overhaul)',

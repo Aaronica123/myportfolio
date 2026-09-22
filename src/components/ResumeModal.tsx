@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Printer, Download, ExternalLink, Mail, Phone, MapPin, Github, Linkedin, Award, Briefcase, GraduationCap } from 'lucide-react';
+import { X, Printer, Download, ExternalLink, Mail, Phone, MapPin, Github, Linkedin, Award, Briefcase, GraduationCap, FolderGit2 } from 'lucide-react';
 import { DEVELOPER_PROFILE, EDUCATION_AND_EXPERIENCE } from '../data/portfolioData';
 
 interface ResumeModalProps {
@@ -192,6 +192,44 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                 </div>
                 <p className="text-slate-400 text-[11px]">Power Learn Project • Verified</p>
                 <p className="text-slate-300 text-[11px] mt-0.5">Full-stack systems, OOP, relational database schemas, Git workflow & API deployments.</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Key Projects & Active Systems */}
+          <div className="space-y-3">
+            <h2 className="font-['Chakra_Petch'] font-bold text-sm uppercase text-cyan-300 tracking-wider flex items-center gap-2">
+              <FolderGit2 size={16} className="text-cyan-400" /> KEY PROJECTS & ACTIVE ARCHITECTURES
+            </h2>
+            <div className="space-y-2 text-xs">
+              <div className="p-3 rounded-xl bg-[#061224] border border-cyan-950 space-y-1">
+                <div className="flex justify-between items-center">
+                  <strong className="text-emerald-300 font-semibold">GeoMakazi: Geographical AI Housing Platform</strong>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/40">Active Ongoing Project</span>
+                </div>
+                <p className="text-slate-300 text-[11px]">
+                  Tackling Kenya's 1.36 Trillion KES housing deficit by eliminating blind door-to-door room hunts for campus comrades. Built with React, Supabase Auth/DB (users, houses, profiles), MinIO S3 object buckets, Redis static cache, Google Maps satellite GIS, Express.js microservice layer (App.js, Index.js, Supabase.js), Nginx reverse proxy, and Railway container orchestration.
+                </p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-[#061224] border border-cyan-950 space-y-1">
+                <div className="flex justify-between items-center">
+                  <strong className="text-cyan-300 font-semibold">The Veneva Project 2.0: Deep Systems Overhaul</strong>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-500/40">Active Systems Overhaul</span>
+                </div>
+                <p className="text-slate-300 text-[11px]">
+                  Engineered dual-core C/JavaScript daemon engine benchmarking sub-2ms transaction throughput, zero-trust ed25519 token rotation, and non-blocking asynchronous pipeline replacing flawed legacy workflows.
+                </p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-[#061224] border border-cyan-950 space-y-1">
+                <div className="flex justify-between items-center">
+                  <strong className="text-amber-300 font-semibold">Julisha Healthcare AI Platform</strong>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-500/40">GDG Pwani Winner</span>
+                </div>
+                <p className="text-slate-300 text-[11px]">
+                  Primary healthcare intelligence platform featuring automated medicine stockout prediction, biometric verification, and native Swahili NLP triage.
+                </p>
               </div>
             </div>
           </div>
